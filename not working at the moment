@@ -1,0 +1,285 @@
+from random import randint
+
+list_usernames = []
+list_emails = []
+list_passwords = []
+ssh_list_names = []
+ssh_list_emails = []
+ssh_list_passwords = []
+username_counter = 1
+email_counter = 1
+
+
+def signup(name, email, password):
+    done = False
+    while True:
+        if username_counter != 1:
+            while True:
+                def usernames(name: str):
+                    while True:
+                        if name in list_usernames:
+                            print('This username already exists')
+                            name = input('create username: ')
+                            continue
+
+                        if len(name) < 3 or len(name) > 12:
+                            print('Your username must be between 3 and 12 characters long!')
+                            name = input('create username: ')
+                            continue
+
+                        for valid_name in name:
+                            if not valid_name.isalnum() or valid_name != '.' or valid_name != '_' or valid_name != '-':
+                                print('Your username can have only letters, digits and "_", ".", "-"')
+                                name = input('create username: ')
+                                continue
+
+                        list_usernames.append(name)
+                        done = True
+                        break
+
+                if done:
+                    break
+        if done:
+            break
+
+        if email_counter != 1:
+            while True:
+                def emails(email):
+                    while True:
+                        symbol_counter = 0
+                        dot_counter = 0
+                        if email in list_emails:
+                            print("This email is taken")
+                            email = input('create email: ')
+                            continue
+
+                        for symbol in email:
+                            if symbol == '@':
+                                symbol_counter += 1
+                            if symbol_counter == 1 and symbol == '.':
+                                dot_counter += 1
+
+                        if symbol_counter >= 2 or symbol_counter == 0:
+                            print("Your email must have only one @")
+                            email = input('create email: ')
+                            continue
+                        if dot_counter >= 2 or dot_counter == 0:
+                            print('Invalid email')
+                            email = input('create email: ')
+                            continue
+
+                        list_mails = ['abd', 'gmail', 'hotmail']
+                        list_after_dots = ['eu', 'bg', 'com', 'us', 'uk', 'ru', 'cu']
+
+                        current_email = email.split('.')
+
+                        if current_email[-2] not in list_mails:
+                            print(f'''Unsupported mail 
+                            supported mails: {", ".join(list_mails)}''')
+                            email = input('create email: ')
+                            continue
+                        if current_email[-1] not in list_after_dots:
+                            print(f'''Invalid domain
+                            valid domain: {', '.join(list_after_dots)}''')
+                            email = input('create email: ')
+                            continue
+
+                        list_emails.append(email)
+                        done = True
+                        break
+
+                if done:
+                    break
+        if done:
+            break
+
+        if password.lower() == 'weak' or password.lower() == 'normal' or password.lower() == 'strong' or password.lower() == 'really strong':
+            def password_strength(password):
+                while True:
+
+                    if password.lower() == 'weak':
+                        weak_password = ['Dog', 'cat', 'Donkey', 'Horse', 'person', 'Working1', 'FREEwIFi',
+                                            'LoveAnimals1',
+                                            'Tiger', *[
+                                chr(randint(33, 122)) + chr(randint(33, 122)) + chr(randint(97, 122)) + str(
+                                    randint(0, 10)) for
+                                weak in range(1000)]]
+                        password = weak_password[randint(0, len(weak_password))]
+                    elif password.lower() == 'normal':
+                        normal_password = [
+                            chr(randint(65, 90)) + chr(randint(65, 90)) + chr(randint(65, 90)) + chr(
+                                randint(65, 90)) + chr(
+                                randint(65, 90)) + chr(randint(65, 90)) + str(
+                                randint(0, 20)) if r % 3 == 0 else chr(
+                                randint(33, 47)) + chr(randint(97, 122)) + chr(randint(97, 122)) + chr(
+                                randint(97, 122)) + chr(
+                                randint(97, 122)) + chr(randint(97, 122)) + chr(
+                                randint(97, 122)) if r == 50 else chr(
+                                randint(97, 122)) + chr(randint(97, 122)) + chr(randint(97, 122)) + ' ' + chr(
+                                randint(97, 122)) + chr(randint(97, 122)) + chr(randint(97, 122)) for r in
+                            range(100)
+                            for normal
+                            in range(1000)]
+                        password = normal_password[randint(0, len(normal_password))]
+                    elif password.lower() == 'strong':
+                        strong_password = [
+                            chr(randint(33, 126)) + chr(randint(33, 126)) + chr(randint(65, 90)) + chr(
+                                randint(97, 122)) + chr(
+                                randint(43, 57)) + chr(randint(102, 117)) + str(randint(50, 170)) + chr(
+                                randint(33, 64)) + chr(
+                                randint(97, 122)) + chr(randint(97, 122)) + str(randint(1, 20)) + chr(
+                                randint(33, 64)) + chr(
+                                randint(33, 122)) for strong in range(1000)]
+                        password = strong_password[randint(0, len(strong_password))]
+                    elif password.lower() == 'really strong':
+                        really_strong_password = [
+                            chr(randint(33, 38)) + chr(randint(33, 126)) * 2 + chr(randint(33, 64)) + chr(
+                                randint(65, 90)) + chr(randint(97, 122)) * 2 + chr(randint(97, 122)) + str(
+                                randint(100, 10000)) + chr(randint(randint(33, 57), randint(65, 122))) + str(
+                                randint(1, 10)) * 2 + chr(randint(224, 238)) + chr(randint(160, 175)) + chr(
+                                randint(97, 122)) + chr(
+                                randint(33, 38)) + chr(randint(33, 126)) * 2 + chr(randint(33, 64)) + chr(
+                                randint(65, 90)) + chr(
+                                randint(97, 122)) * 2 + chr(randint(97, 122)) + str(randint(100, 10000)) + chr(
+                                randint(randint(33, 57), randint(65, 122))) + str(randint(1, 10)) * 2 + chr(
+                                randint(224, 238)) + chr(randint(160, 175)) + chr(randint(97, 122)) + chr(
+                                randint(33, 38)) + chr(
+                                randint(33, 126)) * 2 + chr(randint(33, 64)) + chr(randint(65, 90)) + chr(
+                                randint(97, 122)) * 2 + chr(randint(97, 122)) + str(randint(100, 10000)) + chr(
+                                randint(randint(33, 57), randint(65, 122))) + str(randint(1, 10)) * 2 + chr(
+                                randint(128, 254)) + chr(randint(65, 90)) + chr(randint(97, 122)) + str(
+                                randint(1, 100))
+                            for strong
+                            in range(500)]
+                        password = really_strong_password[randint(0, len(really_strong_password))]
+
+                    if password in list_passwords:
+                        continue
+
+                    list_passwords.append(password)
+                    done = True
+                    break
+        if done:
+            break
+
+        else:
+            def password_validation(password):
+                digit_counter = 0
+                while True:
+                    if password in list_passwords:
+                        print('This password already exists')
+                        password = input('create password: ')
+                        continue
+                    if len(password) < 6 or len(password) > 10:
+                        print('The password must be between 6 and 10 characters long!')
+                        password = input('create password: ')
+                        continue
+                    if not password.isalnum():
+                        print('Your password must contain only letters and digits')
+                        password = input('create password: ')
+                        continue
+
+                    for element in password:
+                        if element.isdigit():
+                            digit_counter += 1
+
+                    if digit_counter < 3:
+                        print('Your password must have at least 3 digits')
+                        password = input('create password: ')
+                        continue
+
+                    if password == username or password in list_emails:
+                        print("Your password cant be the same as your name or email")
+                        password = input('create password: ')
+                        continue
+
+                    list_passwords.append(password)
+                    done = True
+                    break
+        if done:
+            break
+
+
+def login(name, email, password):
+    counter = 0
+    second_counter = 0
+    third_counter = 0
+    dont_exist = True
+    for index in range(len(list_usernames)):
+        counter += 1
+        if name == list_usernames[index]:
+            dont_exist = False
+            break
+    if dont_exist:
+        return "This name doesn't exist!"
+
+    for index in range(len(list_emails)):
+        second_counter += 1
+        if email == list_emails[index]:
+            dont_exist = False
+            break
+    if dont_exist:
+        return "This email doesn't exist!"
+
+    for index in range(len(list_passwords)):
+        third_counter += 1
+        if password == list_passwords[index]:
+            dont_exist = False
+            break
+    if dont_exist:
+        return "This password doesn't exist!"
+
+    if counter == second_counter == third_counter:
+        return f"Welcome user {counter}"
+    else:
+        return "Username, email or password is incorrect!"
+
+
+def ssh_key(name, email, password):
+    ssh_list_names.append(name)
+    ssh_list_emails.append(email)
+    ssh_list_passwords.append(password)
+
+
+def ssh_login():
+    print('\n'.join(list_usernames))
+    account = input('Which account would you like to log in?')
+    for index in range(len(list_usernames)):
+        if account == list_usernames[index]:
+            return f"Welcome user {index + 1}"
+
+    return "This account doesn't exist"
+
+
+while True:
+    login_or_signup = input('choose between login and signup: ')
+
+    if login_or_signup.lower() == 'login':
+        type_login = input('Would you like to login with ssh key? "yes" or "no": ')
+        if type_login.lower() == "yes":
+            ssh_login()
+            continue
+        elif type_login.lower() == "no":
+            username = input('create username: ')
+            user_email = input('create email: ')
+            user_password = input('create password or choose between "weak", "normal", "strong", "really strong": ')
+            login(username, user_email, user_password)
+            continue
+        else:
+            print("Invalid input")
+            continue
+    elif login_or_signup.lower() == 'signup':
+        username = input('create username: ')
+        user_email = input('create email: ')
+        user_password = input('create password or choose between "weak", "normal", "strong", "really strong": ')
+        signup(username, user_email, user_password)
+        print('would you like to save this profile in ssh? (by saving it, you can use just use it to login instead of typing your password everytime')
+        user_ssh = input('"save" or "no": ')
+        while user_ssh.lower() != 'save' or user_ssh.lower() != 'no':
+            user_ssh = input('"save" or "no": ')
+        if user_ssh.lower() == 'save':
+            ssh_key(username, user_email, user_password)
+            continue
+    else:
+        print('Ops! You missed the button!')
+        continue
